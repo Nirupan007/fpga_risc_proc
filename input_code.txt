@@ -1,0 +1,512 @@
+0.	Ld r0, #0                        	; r0 = 2 
+1.	Ld r1, #1                        	; r1 = 3 
+2.	Add r1, r0, r1                 	; r1 = 5 
+3.	St r1, #100                     	; dmem [100] = 5 
+4.	Movc r2                         	; r2 = 0 
+5.	bc #511                          	; Should not take branch 
+6.	St r2, #101                     	; dmem [101] = 0 
+7.	Sub r3, r0, r1                  	; r3 = FFFFFFFD, carry = 1 
+8.	St r3, #102                     	; dmem [102] = FFFFFFFD 
+9.	Movc r2                         	; r2 = 1 
+10.	St r2, #103                     	; dmem [103] = 1 
+11.	Bc #15                           	; Take branch 
+12.	Ld r0, #2                        	; r0 = FF 
+13.	Ld r1, #3                        	; r1 = BC 
+14.	Br #511                          	; Should not take branch, not execute at all 
+15.	Mul r2, r0, r1                 	; r2 = BB44 
+16.	St r2, #104                     	; dmem [104] = BB44 
+17.	Sll r3, r2, #2                   	; r3 = 2ED10 
+18.	Sll r3, r3, #2                   	; r3 = BB440 
+19.	St r3, #105                     	; dmem [105] = BB440 
+20.	Ld r0, #6                        	; r0 = 0 
+21.	And r3, r3, r3                 	; r3 = 0 
+22.	Bz r3, #28                     	; Take branch 
+23.	Not r0, r3                       	; r0 = FFFFFFFF 
+24.	St r0, #106                     	; dmem [106] = FFFFFFFF 
+25.	Br #511                          	; Should not take branch, not execute at all 
+26.	St r0, #1                         	; Should not execute 
+27.	St r0, #0                         	; Should not execute 
+28.	Sra r0, r0, #5                  	; r0 = 87FFFFFF 
+29.	St r0, #107                     	; dmem [107] = 87FFFFFF 
+30.	Bz r0, #511                    	; Should not take branch 
+31.	Ld r4, #9                        	; r4 = 178BD 
+32.	Mul r5, r4, r0                 	; r5 = 78BC8743 
+33.	St r5, #108                     	; dmem [108] = 78BC8743 
+34.	Br #38                           	; Take branch 
+35.	Or r6, r4, r5                   	; r6 = 78BDFFFF 
+36.	St r6, #109                     	; dmem [109] = 78BDFFFF 
+37.	Br #511                          	; Should not take branch, not execute at all 
+38.	Ld r7, #8                        	; r7 = FFFFFFFF 
+39.	Add r8, r7, r6                 	; r8 = 78BDFFFE, carry = 1 
+40.	Sub r9, r8, r4                  	; r9 = 78BC8741 
+41.	St r8, #110                      	; dmem [110] = 78BDFFFE 
+42.	St r9, #111                      	; dmem [111] = 78BC8741 
+43.	Bc #511                          	; Should not take branch 
+44.	Sra r10, r7, #31                	; r10 = 80000001 
+45.	St r10, #112                    	; dmem [112] = 80000001 
+46.	Sll r11, r7, #31                	; r11 = 80000000 
+47.	Sll r11, r11, #1                	; r11 = 00000000 
+48.	St r11, #113                    	; dmem [113] = 00000000 
+49.	Bz r11, #55                     	; Take branch 
+50.	Ld r12, #4                      	; r12 = 9 
+51.	Ld r13, #5                      	; r13 = A 
+52.	St r12, #2                      	; Should not execute 
+53.	St r13, #3                      	; Should not execute 
+54.	Br #511                         	; Should not take branch, not execute at all 
+55.	Add r14, r12, r13               	; r14 = 13 
+56.	Sub r15, r14, r13               	; r15 = 9 
+57.	Mul r15, r15, r15               	; r15 = 51 
+58.	Mul r15, r15, r15               	; r15 = 19A1 
+59.	St r15, #114                    	; dmem [114] = 19A1 
+60.	St r15, #115                    	; dmem [115] = 19A1 
+61.	Ld r0, #115                     	; r0 = 19A1 
+62.	St r14, #115                    	; dmem [115] = 13 
+63.	Ld r0, #115                     	; r0 = 13 
+64.	Ld r1, #115                     	; r1 = 13 
+65.	Not r2, r1                      	; r2 = FFFFFFEC 
+66.	St r1, #116                     	; dmem [116] = 13 
+67.	St r2, #116                     	; dmem [116] = FFFFFFEC 
+68.	Ld r3, #116                     	; r3 = FFFFFFEC 
+69.	Br #99                          	; Take branch 
+70.	Ld r4, #7                       	; r4 = AEC 
+71.	Ld r5, #10                      	; r5 = 91C6BA 
+72.	Add r0, r0, r0                  	; Should not execute 
+73.	Add r0, r0, r0                  	; Should not execute 
+74.	Add r0, r0, r0                  	; Should not execute 
+75.	Add r0, r0, r0                  	; Should not execute 
+76.	Add r0, r0, r0                  	; Should not execute 
+77.	Add r0, r0, r0                  	; Should not execute 
+78.	Add r0, r0, r0                  	; Should not execute 
+79.	Add r0, r0, r0                  	; Should not execute 
+80.	Add r0, r0, r0                  	; Should not execute 
+81.	Add r0, r0, r0                  	; Should not execute 
+82.	Add r0, r0, r0                  	; Should not execute 
+83.	Add r0, r0, r0                  	; Should not execute 
+84.	Add r0, r0, r0                  	; Should not execute 
+85.	Add r0, r0, r0                  	; Should not execute 
+86.	Add r0, r0, r0                  	; Should not execute 
+87.	Add r0, r0, r0                  	; Should not execute 
+88.	Add r0, r0, r0                  	; Should not execute 
+89.	Add r0, r0, r0                  	; Should not execute 
+90.	Add r0, r0, r0                  	; Should not execute 
+91.	Add r0, r0, r0                  	; Should not execute 
+92.	Add r0, r0, r0                  	; Should not execute 
+93.	Add r0, r0, r0                  	; Should not execute 
+94.	Add r0, r0, r0                  	; Should not execute 
+95.	Add r0, r0, r0                  	; Should not execute 
+96.	Add r0, r0, r0                  	; Should not execute 
+97.	Add r0, r0, r0                  	; Should not execute 
+98.	Add r0, r0, r0                  	; Should not execute 
+99.	Sra r6, r4, #0                  	; r6 = AEC 
+100.	Sll r7, r5, #0                  	; r7 = 91C6BA 
+101.	St r6, #117                     	; dmem [117] = AEC 
+102.	St r6, #0                       	; dmem [0] = AEC 
+103.	Br #482                         	; Take branch 
+104.	St r7, #118                     	; dmem [118] = 91C6BA 
+105.	St r7, #1                       	; dmem [1] = 91C6BA 
+106.	Add r0, r0, r0                  	; Should not execute 
+107.	Add r0, r0, r0                  	; Should not execute 
+108.	Add r0, r0, r0                  	; Should not execute 
+109.	Add r0, r0, r0                  	; Should not execute 
+110.	Add r0, r0, r0                  	; Should not execute 
+111.	Add r0, r0, r0                  	; Should not execute 
+112.	Add r0, r0, r0                  	; Should not execute 
+113.	Add r0, r0, r0                  	; Should not execute 
+114.	Add r0, r0, r0                  	; Should not execute 
+115.	Add r0, r0, r0                  	; Should not execute 
+116.	Add r0, r0, r0                  	; Should not execute 
+117.	Add r0, r0, r0                  	; Should not execute 
+118.	Add r0, r0, r0                  	; Should not execute 
+119.	Add r0, r0, r0                  	; Should not execute 
+120.	Add r0, r0, r0                  	; Should not execute 
+121.	Add r0, r0, r0                  	; Should not execute 
+122.	Add r0, r0, r0                  	; Should not execute 
+123.	Add r0, r0, r0                  	; Should not execute 
+124.	Add r0, r0, r0                  	; Should not execute 
+125.	Add r0, r0, r0                  	; Should not execute 
+126.	Add r0, r0, r0                  	; Should not execute 
+127.	Add r0, r0, r0                  	; Should not execute 
+128.	Add r0, r0, r0                  	; Should not execute 
+129.	Add r0, r0, r0                  	; Should not execute 
+130.	Add r0, r0, r0                  	; Should not execute 
+131.	Add r0, r0, r0                  	; Should not execute 
+132.	Add r0, r0, r0                  	; Should not execute 
+133.	Add r0, r0, r0                  	; Should not execute 
+134.	Add r0, r0, r0                  	; Should not execute 
+135.	Add r0, r0, r0                  	; Should not execute 
+136.	Add r0, r0, r0                  	; Should not execute 
+137.	Add r0, r0, r0                  	; Should not execute 
+138.	Add r0, r0, r0                  	; Should not execute 
+139.	Add r0, r0, r0                  	; Should not execute 
+140.	Add r0, r0, r0                  	; Should not execute 
+141.	Add r0, r0, r0                  	; Should not execute 
+142.	Add r0, r0, r0                  	; Should not execute 
+143.	Add r0, r0, r0                  	; Should not execute 
+144.	Add r0, r0, r0                  	; Should not execute 
+145.	Add r0, r0, r0                  	; Should not execute 
+146.	Add r0, r0, r0                  	; Should not execute 
+147.	Add r0, r0, r0                  	; Should not execute 
+148.	Add r0, r0, r0                  	; Should not execute 
+149.	Add r0, r0, r0                  	; Should not execute 
+150.	Add r0, r0, r0                  	; Should not execute 
+151.	Add r0, r0, r0                  	; Should not execute 
+152.	Add r0, r0, r0                  	; Should not execute 
+153.	Add r0, r0, r0                  	; Should not execute 
+154.	Add r0, r0, r0                  	; Should not execute 
+155.	Add r0, r0, r0                  	; Should not execute 
+156.	Add r0, r0, r0                  	; Should not execute 
+157.	Add r0, r0, r0                  	; Should not execute 
+158.	Add r0, r0, r0                  	; Should not execute 
+159.	Add r0, r0, r0                  	; Should not execute 
+160.	Add r0, r0, r0                  	; Should not execute 
+161.	Add r0, r0, r0                  	; Should not execute 
+162.	Add r0, r0, r0                  	; Should not execute 
+163.	Add r0, r0, r0                  	; Should not execute 
+164.	Add r0, r0, r0                  	; Should not execute 
+165.	Add r0, r0, r0                  	; Should not execute 
+166.	Add r0, r0, r0                  	; Should not execute 
+167.	Add r0, r0, r0                  	; Should not execute 
+168.	Add r0, r0, r0                  	; Should not execute 
+169.	Add r0, r0, r0                  	; Should not execute 
+170.	Add r0, r0, r0                  	; Should not execute 
+171.	Add r0, r0, r0                  	; Should not execute 
+172.	Add r0, r0, r0                  	; Should not execute 
+173.	Add r0, r0, r0                  	; Should not execute 
+174.	Add r0, r0, r0                  	; Should not execute 
+175.	Add r0, r0, r0                  	; Should not execute 
+176.	Add r0, r0, r0                  	; Should not execute 
+177.	Add r0, r0, r0                  	; Should not execute 
+178.	Add r0, r0, r0                  	; Should not execute 
+179.	Add r0, r0, r0                  	; Should not execute 
+180.	Add r0, r0, r0                 	; Should not execute 
+181.	Add r0, r0, r0                  	; Should not execute 
+182.	Add r0, r0, r0                  	; Should not execute 
+183.	Add r0, r0, r0                  	; Should not execute 
+184.	Add r0, r0, r0                  	; Should not execute 
+185.	Add r0, r0, r0                  	; Should not execute 
+186.	Add r0, r0, r0                  	; Should not execute 
+187.	Add r0, r0, r0                  	; Should not execute 
+188.	Add r0, r0, r0                  	; Should not execute 
+189.	Add r0, r0, r0                  	; Should not execute 
+190.	Add r0, r0, r0                  	; Should not execute 
+191.	Add r0, r0, r0                  	; Should not execute 
+192.	Add r0, r0, r0                  	; Should not execute 
+193.	Add r0, r0, r0                  	; Should not execute 
+194.	Add r0, r0, r0                  	; Should not execute 
+195.	Add r0, r0, r0                  	; Should not execute 
+196.	Add r0, r0, r0                  	; Should not execute 
+197.	Add r0, r0, r0                  	; Should not execute 
+198.	Add r0, r0, r0                  	; Should not execute 
+199.	Add r0, r0, r0                  	; Should not execute 
+200.	Add r0, r0, r0                  	; Should not execute 
+201.	Add r0, r0, r0                  	; Should not execute 
+202.	Add r0, r0, r0                  	; Should not execute 
+203.	Add r0, r0, r0                  	; Should not execute 
+204.	Add r0, r0, r0                  	; Should not execute 
+205.	Add r0, r0, r0                  	; Should not execute 
+206.	Add r0, r0, r0                  	; Should not execute 
+207.	Add r0, r0, r0                  	; Should not execute 
+208.	Add r0, r0, r0                  	; Should not execute 
+209.	Add r0, r0, r0                  	; Should not execute 
+210.	Add r0, r0, r0                  	; Should not execute 
+211.	Add r0, r0, r0                  	; Should not execute 
+212.	Add r0, r0, r0                  	; Should not execute 
+213.	Add r0, r0, r0                  	; Should not execute 
+214.	Add r0, r0, r0                  	; Should not execute 
+215.	Add r0, r0, r0                  	; Should not execute 
+216.	Add r0, r0, r0                  	; Should not execute 
+217.	Add r0, r0, r0                  	; Should not execute 
+218.	Add r0, r0, r0                  	; Should not execute 
+219.	Add r0, r0, r0                  	; Should not execute 
+220.	Add r0, r0, r0                  	; Should not execute 
+221.	Add r0, r0, r0                  	; Should not execute 
+222.	Add r0, r0, r0                  	; Should not execute 
+223.	Add r0, r0, r0                  	; Should not execute 
+224.	Add r0, r0, r0                  	; Should not execute 
+225.	Add r0, r0, r0                  	; Should not execute 
+226.	Add r0, r0, r0                  	; Should not execute 
+227.	Add r0, r0, r0                  	; Should not execute 
+228.	Add r0, r0, r0                  	; Should not execute 
+229.	Add r0, r0, r0                  	; Should not execute 
+230.	Add r0, r0, r0                  	; Should not execute 
+231.	Add r0, r0, r0                  	; Should not execute 
+232.	Add r0, r0, r0                  	; Should not execute 
+233.	Add r0, r0, r0                  	; Should not execute 
+234.	Add r0, r0, r0                  	; Should not execute 
+235.	Add r0, r0, r0                  	; Should not execute 
+236.	Add r0, r0, r0                  	; Should not execute 
+237.	Add r0, r0, r0                  	; Should not execute 
+238.	Add r0, r0, r0                  	; Should not execute 
+239.	Add r0, r0, r0                  	; Should not execute 
+240.	Add r0, r0, r0                  	; Should not execute 
+241.	Add r0, r0, r0                  	; Should not execute 
+242.	Add r0, r0, r0                  	; Should not execute 
+243.	Add r0, r0, r0                  	; Should not execute 
+244.	Add r0, r0, r0                  	; Should not execute 
+245.	Add r0, r0, r0                  	; Should not execute 
+246.	Add r0, r0, r0                  	; Should not execute 
+247.	Add r0, r0, r0                  	; Should not execute 
+248.	Add r0, r0, r0                  	; Should not execute 
+249.	Add r0, r0, r0                  	; Should not execute 
+250.	Add r0, r0, r0                  	; Should not execute 
+251.	Add r0, r0, r0                  	; Should not execute 
+252.	Add r0, r0, r0                  	; Should not execute 
+253.	Add r0, r0, r0                  	; Should not execute 
+254.	Add r0, r0, r0                  	; Should not execute 
+255.	Add r0, r0, r0                  	; Should not execute 
+256.	Add r0, r0, r0                  	; Should not execute 
+257.	Add r0, r0, r0                  	; Should not execute 
+258.	Add r0, r0, r0                  	; Should not execute 
+259.	Add r0, r0, r0                  	; Should not execute 
+260.	Add r0, r0, r0                  	; Should not execute 
+261.	Add r0, r0, r0                  	; Should not execute 
+262.	Add r0, r0, r0                  	; Should not execute 
+263.	Add r0, r0, r0                  	; Should not execute 
+264.	Add r0, r0, r0                  	; Should not execute 
+265.	Add r0, r0, r0                  	; Should not execute 
+266.	Add r0, r0, r0                  	; Should not execute 
+267.	Add r0, r0, r0                  	; Should not execute 
+268.	Add r0, r0, r0                  	; Should not execute 
+269.	Add r0, r0, r0                  	; Should not execute 
+270.	Add r0, r0, r0                  	; Should not execute 
+271.	Add r0, r0, r0                  	; Should not execute 
+272.	Add r0, r0, r0                  	; Should not execute 
+273.	Add r0, r0, r0                  	; Should not execute 
+274.	Add r0, r0, r0                  	; Should not execute 
+275.	Add r0, r0, r0                  	; Should not execute 
+276.	Add r0, r0, r0                  	; Should not execute 
+277.	Add r0, r0, r0                  	; Should not execute 
+278.	Add r0, r0, r0                  	; Should not execute 
+279.	Add r0, r0, r0                  	; Should not execute 
+280.	Add r0, r0, r0                  	; Should not execute 
+281.	Add r0, r0, r0                  	; Should not execute 
+282.	Add r0, r0, r0                  	; Should not execute 
+283.	Add r0, r0, r0                  	; Should not execute 
+284.	Add r0, r0, r0                  	; Should not execute 
+285.	Add r0, r0, r0                  	; Should not execute 
+286.	Add r0, r0, r0                  	; Should not execute 
+287.	Add r0, r0, r0                  	; Should not execute 
+288.	Add r0, r0, r0                  	; Should not execute 
+289.	Add r0, r0, r0                  	; Should not execute 
+290.	Add r0, r0, r0                  	; Should not execute 
+291.	Add r0, r0, r0                  	; Should not execute 
+292.	Add r0, r0, r0                  	; Should not execute 
+293.	Add r0, r0, r0                  	; Should not execute 
+294.	Add r0, r0, r0                  	; Should not execute 
+295.	Add r0, r0, r0                  	; Should not execute 
+296.	Add r0, r0, r0                  	; Should not execute 
+297.	Add r0, r0, r0                  	; Should not execute 
+298.	Add r0, r0, r0                 	; Should not execute 
+299.	Add r0, r0, r0                  	; Should not execute 
+300.	Add r0, r0, r0                  	; Should not execute 
+301.	Add r0, r0, r0                  	; Should not execute 
+302.	Add r0, r0, r0                 	; Should not execute 
+303.	Add r0, r0, r0                 	; Should not execute 
+304.	Add r0, r0, r0                	; Should not execute 
+305.	Add r0, r0, r0                	; Should not execute 
+306.	Add r0, r0, r0                  	; Should not execute 
+307.	Add r0, r0, r0                  	; Should not execute 
+308.	Add r0, r0, r0                  	; Should not execute 
+309.	Add r0, r0, r0                  	; Should not execute 
+310.	Add r0, r0, r0                  	; Should not execute 
+311.	Add r0, r0, r0                  	; Should not execute 
+312.	Add r0, r0, r0                  	; Should not execute 
+313.	Add r0, r0, r0                  	; Should not execute 
+314.	Add r0, r0, r0                  	; Should not execute 
+315.	Add r0, r0, r0                  	; Should not execute 
+316.	Add r0, r0, r0                  	; Should not execute 
+317.	Add r0, r0, r0                  	; Should not execute 
+318.	Add r0, r0, r0                  	; Should not execute 
+319.	Add r0, r0, r0                  	; Should not execute 
+320.	Add r0, r0, r0                  	; Should not execute 
+321.	Add r0, r0, r0                  	; Should not execute 
+322.	Add r0, r0, r0                  	; Should not execute 
+323.	Add r0, r0, r0                  	; Should not execute 
+324.	Add r0, r0, r0                  	; Should not execute 
+325.	Add r0, r0, r0                  	; Should not execute 
+326.	Add r0, r0, r0                  	; Should not execute 
+327.	Add r0, r0, r0                  	; Should not execute 
+328.	Add r0, r0, r0                  	; Should not execute 
+329.	Add r0, r0, r0                  	; Should not execute 
+330.	Add r0, r0, r0                  	; Should not execute 
+331.	Add r0, r0, r0                  	; Should not execute 
+332.	Add r0, r0, r0                  	; Should not execute 
+333.	Add r0, r0, r0                  	; Should not execute 
+334.	Add r0, r0, r0                  	; Should not execute 
+335.	Add r0, r0, r0                  	; Should not execute 
+336.	Add r0, r0, r0                  	; Should not execute 
+337.	Add r0, r0, r0                  	; Should not execute 
+338.	Add r0, r0, r0                  	; Should not execute 
+339.	Add r0, r0, r0                  	; Should not execute 
+340.	Add r0, r0, r0                  	; Should not execute 
+341.	Add r0, r0, r0                  	; Should not execute 
+342.	Add r0, r0, r0                  	; Should not execute 
+343.	Add r0, r0, r0                  	; Should not execute 
+344.	Add r0, r0, r0                  	; Should not execute 
+345.	Add r0, r0, r0                  	; Should not execute 
+346.	Add r0, r0, r0                  	; Should not execute 
+347.	Add r0, r0, r0                  	; Should not execute 
+348.	Add r0, r0, r0                  	; Should not execute 
+349.	Add r0, r0, r0                  	; Should not execute 
+350.	Add r0, r0, r0                  	; Should not execute 
+351.	Add r0, r0, r0                  	; Should not execute 
+352.	Add r0, r0, r0                  	; Should not execute 
+353.	Add r0, r0, r0                  	; Should not execute 
+354.	Add r0, r0, r0                  	; Should not execute 
+355.	Add r0, r0, r0                  	; Should not execute 
+356.	Add r0, r0, r0                  	; Should not execute 
+357.	Add r0, r0, r0                  	; Should not execute 
+358.	Add r0, r0, r0                  	; Should not execute 
+359.	Add r0, r0, r0                  	; Should not execute 
+360.	Add r0, r0, r0                  	; Should not execute 
+361.	Add r0, r0, r0                  	; Should not execute 
+362.	Add r0, r0, r0                  	; Should not execute 
+363.	Add r0, r0, r0                  	; Should not execute 
+364.	Add r0, r0, r0                  	; Should not execute 
+365.	Add r0, r0, r0                  	; Should not execute 
+366.	Add r0, r0, r0                  	; Should not execute 
+367.	Add r0, r0, r0                  	; Should not execute 
+368.	Add r0, r0, r0                  	; Should not execute 
+369.	Add r0, r0, r0                  	; Should not execute 
+370.	Add r0, r0, r0                  	; Should not execute 
+371.	Add r0, r0, r0                  	; Should not execute 
+372.	Add r0, r0, r0                  	; Should not execute 
+373.	Add r0, r0, r0                  	; Should not execute 
+374.	Add r0, r0, r0                  	; Should not execute 
+375.	Add r0, r0, r0                  	; Should not execute 
+376.	Add r0, r0, r0                  	; Should not execute 
+377.	Add r0, r0, r0                  	; Should not execute 
+378.	Add r0, r0, r0                  	; Should not execute 
+379.	Add r0, r0, r0                  	; Should not execute 
+380.	Add r0, r0, r0                  	; Should not execute 
+381.	Add r0, r0, r0                  	; Should not execute 
+382.	Add r0, r0, r0                  	; Should not execute 
+383.	Add r0, r0, r0                  	; Should not execute 
+384.	Add r0, r0, r0                  	; Should not execute 
+385.	Add r0, r0, r0                  	; Should not execute 
+386.	Add r0, r0, r0                  	; Should not execute 
+387.	Add r0, r0, r0                  	; Should not execute 
+388.	Add r0, r0, r0                  	; Should not execute 
+389.	Add r0, r0, r0                  	; Should not execute 
+390.	Add r0, r0, r0                  	; Should not execute 
+391.	Add r0, r0, r0                  	; Should not execute 
+392.	Add r0, r0, r0                  	; Should not execute 
+393.	Add r0, r0, r0                  	; Should not execute 
+394.	Add r0, r0, r0                  	; Should not execute 
+395.	Add r0, r0, r0                  	; Should not execute 
+396.	Add r0, r0, r0                  	; Should not execute 
+397.	Add r0, r0, r0                  	; Should not execute 
+398.	Add r0, r0, r0                  	; Should not execute 
+399.	Add r0, r0, r0                  	; Should not execute 
+400.	Add r0, r0, r0                  	; Should not execute 
+401.	Add r0, r0, r0                  	; Should not execute 
+402.	Add r0, r0, r0                  	; Should not execute 
+403.	Add r0, r0, r0                  	; Should not execute 
+404.	Add r0, r0, r0                  	; Should not execute 
+405.	Add r0, r0, r0                  	; Should not execute 
+406.	Add r0, r0, r0                  	; Should not execute 
+407.	Add r0, r0, r0                  	; Should not execute 
+408.	Add r0, r0, r0                  	; Should not execute 
+409.	Add r0, r0, r0                  	; Should not execute 
+410.	Add r0, r0, r0                  	; Should not execute 
+411.	Add r0, r0, r0                  	; Should not execute 
+412.	Add r0, r0, r0                  	; Should not execute 
+413.	Add r0, r0, r0                  	; Should not execute 
+414.	Add r0, r0, r0                  	; Should not execute 
+415.	Add r0, r0, r0                  	; Should not execute 
+416.	Add r0, r0, r0                  	; Should not execute 
+417.	Add r0, r0, r0                  	; Should not execute 
+418.	Add r0, r0, r0                  	; Should not execute 
+419.	Add r0, r0, r0                  	; Should not execute 
+420.	Add r0, r0, r0                  	; Should not execute 
+421.	Add r0, r0, r0                  	; Should not execute 
+422.	Add r0, r0, r0                  	; Should not execute 
+423.	Add r0, r0, r0                  	; Should not execute 
+424.	Add r0, r0, r0                  	; Should not execute 
+425.	Add r0, r0, r0                  	; Should not execute 
+426.	Add r0, r0, r0                  	; Should not execute 
+427.	Add r0, r0, r0                  	; Should not execute 
+428.	Add r0, r0, r0                  	; Should not execute 
+429.	Add r0, r0, r0                  	; Should not execute 
+430.	Add r0, r0, r0                  	; Should not execute 
+431.	Add r0, r0, r0                  	; Should not execute 
+432.	Add r0, r0, r0                  	; Should not execute 
+433.	Add r0, r0, r0                  	; Should not execute 
+434.	Add r0, r0, r0                  	; Should not execute 
+435.	Add r0, r0, r0                  	; Should not execute 
+436.	Add r0, r0, r0                  	; Should not execute 
+437.	Add r0, r0, r0                  	; Should not execute 
+438.	Add r0, r0, r0                  	; Should not execute 
+439.	Add r0, r0, r0                  	; Should not execute 
+440.	Add r0, r0, r0                  	; Should not execute 
+441.	Add r0, r0, r0                  	; Should not execute 
+442.	Add r0, r0, r0                  	; Should not execute 
+443.	Add r0, r0, r0                  	; Should not execute 
+444.	Add r0, r0, r0                  	; Should not execute 
+445.	Add r0, r0, r0                  	; Should not execute 
+446.	Add r0, r0, r0                  	; Should not execute 
+447.	Add r0, r0, r0                  	; Should not execute 
+448.	Add r0, r0, r0                  	; Should not execute 
+449.	Add r0, r0, r0                  	; Should not execute 
+450.	Add r0, r0, r0                  	; Should not execute 
+451.	Add r0, r0, r0                  	; Should not execute 
+452.	Add r0, r0, r0                  	; Should not execute 
+453.	Add r0, r0, r0                  	; Should not execute 
+454.	Add r0, r0, r0                  	; Should not execute 
+455.	Add r0, r0, r0                  	; Should not execute 
+456.	Add r0, r0, r0                  	; Should not execute 
+457.	Add r0, r0, r0                  	; Should not execute 
+458.	Add r0, r0, r0                  	; Should not execute 
+459.	Add r0, r0, r0                  	; Should not execute 
+460.	Add r0, r0, r0                  	; Should not execute 
+461.	Add r0, r0, r0                  	; Should not execute 
+462.	Add r0, r0, r0                  	; Should not execute 
+463.	Add r0, r0, r0                  	; Should not execute 
+464.	Add r0, r0, r0                  	; Should not execute 
+465.	Add r0, r0, r0                  	; Should not execute 
+466.	Add r0, r0, r0                  	; Should not execute 
+467.	Add r0, r0, r0                  	; Should not execute 
+468.	Add r0, r0, r0                  	; Should not execute 
+469.	Add r0, r0, r0                  	; Should not execute 
+470.	Add r0, r0, r0                  	; Should not execute 
+471.	Add r0, r0, r0                  	; Should not execute 
+472.	Add r0, r0, r0                  	; Should not execute 
+473.	Add r0, r0, r0                  	; Should not execute 
+474.	Add r0, r0, r0                  	; Should not execute 
+475.	Add r0, r0, r0                  	; Should not execute 
+476.	Add r0, r0, r0                  	; Should not execute 
+477.	Add r0, r0, r0                  	; Should not execute 
+478.	Add r0, r0, r0                  	; Should not execute 
+479.	Add r0, r0, r0                  	; Should not execute 
+480.	Add r0, r0, r0                  	; Should not execute 
+481.	Add r0, r0, r0                  	; Should not execute 
+482.	Ld r0, #0                       	; r0 = AEC 
+483.	Ld r0, #1                       	; r0 = 91C6BA 
+484.	Ld r0, #2                       	; r0 = FF 
+485.	Ld r0, #3                       	; r0 = BC 
+486.	Ld r0, #4                       	; r0 = 9 
+487.	Ld r0, #5                       	; r0 = A 
+488.	Ld r0, #6                       	; r0 = 0 
+489.	Ld r0, #7                       	; r0 = AEC 
+490.	Ld r0, #8                       	; r0 = FFFFFFFF 
+491.	Ld r0, #9                       	; r0 = 178BD 
+492.	Ld r0, #10                     	; r0 = 91C6BA 
+493.	Ld r0, #100                   	; r0 = 5 
+494.	Ld r0, #101                     	; r0 = 0 
+495.	Ld r0, #102                     	; r0 = FFFFFFFD 
+496.	Ld r0, #103                     	; r0 = 1 
+497.	Ld r0, #104                     	; r0 = BB44 
+498.	Ld r0, #105                     	; r0 = BB440 
+499.	Ld r0, #106                     	; r0 = FFFFFFFF 
+500.	Ld r0, #107                     	; r0 = 87FFFFFF 
+501.	Ld r0, #108                     	; r0 = 78BC8743 
+502.	Ld r0, #109                       	; r0 = 78BDFFFF 
+503.	Ld r0, #110                       	; r0 = 78BDFFFE 
+504.	Ld r0, #111                       	; r0 = 78BC8741 
+505.	Ld r0, #112                       	; r0 = 80000001 
+506.	Ld r0, #113                       	; r0 = 00000000 
+507.	Ld r0, #114                       	; r0 = 19A1 
+508.	Ld r0, #115                       	; r0 = 13 
+509.	Ld r0, #116                       	; r0 = FFFFFFEC 
+510.	Ld r0, #117                       	; r0 = AEC 
+511.	Ld r0, #118                       	; r0 = 91C6BA

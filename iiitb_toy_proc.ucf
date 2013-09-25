@@ -1,0 +1,13 @@
+
+
+NET "clk" LOC = AB13;
+NET "rst" LOC = C18;
+
+# PlanAhead Generated physical constraints
+ 
+#Created by Constraints Editor (xc6slx45t-fgg484-3) - 2012/04/30
+
+NET "clk" TNM_NET = clk;
+TIMESPEC TS_clk = PERIOD "clk" 7.7 ns HIGH 50%;
+
+#Maximum operational frequency is approximately 129.8 MHZ
